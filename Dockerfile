@@ -89,6 +89,13 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& tar -zxC /usr/src -f nginx.tar.gz \
 	&& rm nginx.tar.gz \
 	&& cd /usr/src/nginx-$NGINX_VERSION \
+	# && ./configure $CONFIG --with-debug \
+	# && make -j$(getconf _NPROCESSORS_ONLN) \
+	# && mv objs/nginx objs/nginx-debug \
+	# && mv objs/ngx_http_xslt_filter_module.so objs/ngx_http_xslt_filter_module-debug.so \
+	# && mv objs/ngx_http_image_filter_module.so objs/ngx_http_image_filter_module-debug.so \
+	# && mv objs/ngx_http_geoip_module.so objs/ngx_http_geoip_module-debug.so \
+	# && mv objs/ngx_stream_geoip_module.so objs/ngx_stream_geoip_module-debug.so \
 	&& git clone https://github.com/eustas/ngx_brotli.git \
 	&& cd ngx_brotli \
 	&& git submodule update --init --recursive \
@@ -141,7 +148,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	\
 	# forward request and error logs to docker log collector
 	&& ln -sf /dev/stdout /var/log/nginx/access.log \
-	&& ln -sf /dev/stderr /var/log/nginx/error.log
+	&& ln -sf /dev/stderr /var/log/nginx/error.log \
 	&& nginx -V
 
 COPY nginx.conf /etc/nginx/nginx.conf
