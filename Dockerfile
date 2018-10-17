@@ -100,9 +100,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& cd ngx_brotli \
 	&& git submodule update --init --recursive \
 	&& cd /usr/src/nginx-$NGINX_VERSION \
-	&& git clone https://github.com/openssl/openssl.git \
-	&& cd openssl \
-	&& git submodule update --init --recursive \
+	&& wget -c https://www.openssl.org/source/openssl-1.1.1.tar.gz -O - | tar -xz -C openssl \
 	&& cd /usr/src/nginx-$NGINX_VERSION \
 	&& git clone https://github.com/openresty/headers-more-nginx-module.git \
 	&& cd /usr/src/nginx-$NGINX_VERSION \
