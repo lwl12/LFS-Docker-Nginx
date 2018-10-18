@@ -10,7 +10,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 		--prefix=/etc/nginx \
 		--sbin-path=/usr/sbin/nginx \
 		--modules-path=/usr/lib/nginx/modules \
-		--conf-path=/etc/nginx/conf/nginx.conf \
+		--conf-path=/etc/nginx/nginx.conf \
 		--error-log-path=/var/log/nginx/error.log \
 		--http-log-path=/var/log/nginx/access.log \
 		--pid-path=/var/run/nginx.pid \
@@ -141,7 +141,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log \
 	&& nginx -V
 
-COPY *.conf /etc/nginx/conf
+COPY *.conf /etc/nginx
 
 EXPOSE 80 443
 
