@@ -50,6 +50,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 		--with-compat \
 		--with-file-aio \
 		--with-http_v2_module \
+		--with-http_v2_hpack_enc \
 		--with-openssl=./openssl \
 		--add-module=./ngx_brotli \
 		--add-module=./headers-more-nginx-module \
@@ -102,7 +103,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& git clone https://github.com/openresty/headers-more-nginx-module.git \
 	&& cd /usr/src/nginx-$NGINX_VERSION \
 	&& curl https://raw.githubusercontent.com/kn007/patch/master/nginx.patch | patch -p1 \
-	&& curl https://raw.githubusercontent.com/kn007/patch/master/nginx_strict-sni.patch | patch -p1 \
+	&& curl https://raw.githubusercontent.com/kn007/patch/master/nginx_strict-sni.patch	| patch -p1 \
 	&& ./configure $CONFIG \
 	&& make -j$(getconf _NPROCESSORS_ONLN) \
 	&& make install \
