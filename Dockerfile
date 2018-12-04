@@ -2,7 +2,7 @@ FROM alpine:3.8
 
 LABEL maintainer="lwl12 <docker@lwl12.com>"
 
-ENV NGINX_VERSION 1.15.5
+ENV NGINX_VERSION 1.15.7
 ENV OPENSSL_VERSION 1.1.1a
 
 RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
@@ -51,7 +51,9 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 		--with-file-aio \
 		--with-http_v2_module \
 		--with-http_v2_hpack_enc \
+		--with-zlib=./zlib-cf
 		--with-openssl=./openssl \
+		--with-openssl-opt='zlib enable-tls1_3' \
 		--add-module=./ngx_brotli \
 		--add-module=./headers-more-nginx-module \
 	" \
@@ -94,6 +96,10 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& git clone https://github.com/eustas/ngx_brotli.git \
 	&& cd ngx_brotli \
 	&& git submodule update --init --recursive \
+	&& cd /usr/src/nginx-$NGINX_VERSION \
+	&& git clone https://github.com/cloudflare/zlib.git zlib-cf \
+	&& cd zlib-cf \
+	&& make -f Makefile.in distclean \
 	&& cd /usr/src/nginx-$NGINX_VERSION \
 	&& curl https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz -o openssl.gz \
 	&& tar -xzf openssl.gz \
