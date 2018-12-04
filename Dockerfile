@@ -105,9 +105,9 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& tar -xzf openssl.gz \
 	&& mv openssl-$OPENSSL_VERSION openssl \
 	&& rm openssl.gz \
-	&& cd /usr/src/nginx-$NGINX_VERSION/openssl \
-	&& curl https://raw.githubusercontent.com/hakasenyang/openssl-patch/master/openssl-equal-1.1.2-dev_ciphers.patch | patch -p1 \
-	&& curl https://raw.githubusercontent.com/hakasenyang/openssl-patch/master/openssl-1.1.1-chacha_draft.patch | patch -p1 \
+	# && cd /usr/src/nginx-$NGINX_VERSION/openssl \
+	# && curl https://raw.githubusercontent.com/hakasenyang/openssl-patch/master/openssl-equal-1.1.2-dev_ciphers.patch | patch -p1 \
+	# && curl https://raw.githubusercontent.com/hakasenyang/openssl-patch/master/openssl-1.1.1-chacha_draft.patch | patch -p1 \
 	&& cd /usr/src/nginx-$NGINX_VERSION \
 	&& git clone https://github.com/openresty/headers-more-nginx-module.git \
 	&& cd /usr/src/nginx-$NGINX_VERSION \
